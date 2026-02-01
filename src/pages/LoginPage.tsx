@@ -1,5 +1,5 @@
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  return <div className="bg-sky-600">LoginPage</div>;
 };
 
 export default LoginPage;

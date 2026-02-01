@@ -1,5 +1,5 @@
 const RegisterPage = () => {
-  return <div>RegisterPage</div>;
+  return <div className="bg-sky-600">RegisterPage</div>;
 };
 
 export default RegisterPage;

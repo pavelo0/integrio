@@ -1,7 +1,7 @@
 export const ROUTES = {
   HOME: '/',
-  LOGIN: '/login',
-  REGISTRATION: '/registration',
+  LOGIN: 'login/',
+  REGISTRATION: '/register',
 };
 
 //dashboard routes soon
