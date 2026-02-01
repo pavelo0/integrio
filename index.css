@@ -1,7 +1,27 @@
 @import 'tailwindcss';
 
+:root {
+  --hero-bg: #0f172a;
+  --hero-bg-soft: #1e293b;
+  --accent: #34d399;
+  --accent-hover: #10b981;
+  --header-bg: rgba(30, 41, 59, 0.9);
+  --header-border: rgba(255, 255, 255, 0.08);
+}
+
 html {
   scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--hero-bg);
+}
+
+a,
+button {
+  cursor: pointer;
 }
 
 @layer components {
@@ -9,8 +29,28 @@ html {
     @apply max-w-[1250px] mx-auto h-full px-4;
   }
 
+  .header-plank {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    width: calc(100% - 2rem);
+    max-width: 100%;
+    border-radius: 9999px;
+    background: var(--header-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--header-border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  }
+
   .hero-visual {
     animation: hero-fade-in 1s ease-out;
+  }
+
+  .hero-levitate {
+    animation: hero-levitate 5s ease-in-out infinite;
   }
 
   @keyframes hero-fade-in {
@@ -21,6 +61,16 @@ html {
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes hero-levitate {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-16px);
     }
   }
 }

@@ -3,5 +3,3 @@ export const ROUTES = {
   LOGIN: 'login/',
   REGISTRATION: '/register',
 };
-
-//dashboard routes soon
