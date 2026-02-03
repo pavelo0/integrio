@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginSchema, type Login } from '../schemas/auth';
 import { login } from '../store/authSlice';
 import type { RootState } from '../store/store';
@@ -10,6 +10,7 @@ import type { RootState } from '../store/store';
 const LoginPage = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const auth = useSelector((state: RootState) => state.auth);
 
   const handleIsPasswordVisible = () => {
@@ -45,11 +46,12 @@ const LoginPage = () => {
     }
 
     dispatch(login(data));
+    navigate('/service');
   };
 
   return (
     <div
-      className="relative min-h-screen flex items-center justify-center overflow-hidden py-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden py-10"
       style={{ backgroundColor: 'var(--hero-bg)' }}
     >
       <div

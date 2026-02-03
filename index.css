@@ -45,6 +45,23 @@ button {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
   }
 
+  .service-sidebar {
+    position: fixed;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    width: 4rem;
+    height: 100vh;
+    max-height: 90%;
+    border-radius: 9999px;
+    background: var(--header-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--header-border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    z-index: 40;
+  }
+
   .hero-visual {
     animation: hero-fade-in 1s ease-out;
   }

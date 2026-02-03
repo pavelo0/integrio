@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerSchema, type Register } from '../schemas/auth';
 import { register as registerAction } from '../store/authSlice';
 import type { RootState } from '../store/store';
@@ -11,6 +11,7 @@ const RegisterPage = () => {
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState<boolean>(false);
   const dispatch = useDispatch();
   const auth = useSelector((state: RootState) => state.auth);
+  const navigate = useNavigate();
 
   const { register, handleSubmit, formState, setError } = useForm<Register>({
     resolver: zodResolver(registerSchema),
@@ -43,11 +44,12 @@ const RegisterPage = () => {
     }
 
     dispatch(registerAction(data));
+    navigate('/service');
   };
 
   return (
     <div
-      className="relative min-h-screen flex items-center justify-center overflow-hidden py-27"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden py-10"
       style={{ backgroundColor: 'var(--hero-bg)' }}
     >
       <div
