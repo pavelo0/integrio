@@ -21,11 +21,11 @@ const App = () => {
         <Route path={ROUTES.REGISTRATION} element={<RegisterPage />} />
 
         <Route path={ROUTES.SERVICE} element={<Service />}>
-          <Route index element={<Navigate to={ROUTES.SERVICE_HOME} replace />} />
           <Route path="home" element={<ServiceHomePage />} />
           <Route path="dashboard" element={<ServiceDashboardPage />} />
           <Route path="workshop" element={<ServiceWorkshopPage />} />
           <Route path="profile" element={<ServiceProfilePage />} />
+          <Route index element={<Navigate to={ROUTES.SERVICE_HOME} replace />} />
         </Route>
       </Routes>
     </BrowserRouter>

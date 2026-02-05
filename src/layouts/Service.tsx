@@ -3,7 +3,13 @@ import ServiceHeader from '../components/ServiceHeader';
 
 const Service = () => {
   return (
-    <div className="flex h-screen bg-(--hero-bg)">
+    <div
+      className="flex h-screen bg-(--hero-bg-soft)"
+      style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.4) 1px, transparent 0)`,
+        backgroundSize: '32px 32px',
+      }}
+    >
       <ServiceHeader />
       <main className="flex-1 min-w-0 pl-[8rem] pt-[1rem]">
         <Outlet />
