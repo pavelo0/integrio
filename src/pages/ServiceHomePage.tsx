@@ -24,7 +24,7 @@ const ServiceHomePage = () => {
         <p className="mt-3 text-slate-400">Your chat widgets will appear here.</p>
 
         {userChatsLength > 0 ? (
-          <ChatsList />
+          <ChatsList onOpenCreateModal={openChatCreateModal} />
         ) : (
           <EmptyChats onOpenCreateModal={openChatCreateModal} />
         )}

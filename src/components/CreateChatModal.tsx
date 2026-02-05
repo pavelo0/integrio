@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import type React from 'react';
+import { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { createChatSchema, type CreateChat } from '../schemas/chats';
@@ -21,6 +22,7 @@ const CreateChatModal = ({ isOpen, onClose }: CreateChatModalProps) => {
     handleSubmit,
     formState: { errors },
     setError,
+    reset,
   } = useForm<CreateChat>({
     resolver: zodResolver(createChatSchema),
     mode: 'onSubmit',
@@ -33,31 +35,64 @@ const CreateChatModal = ({ isOpen, onClose }: CreateChatModalProps) => {
   const handleBackdropClick = () => onClose();
   const handleContentClick = (e: React.MouseEvent) => e.stopPropagation();
 
-  const handleCreateChat = (data: CreateChat) => {
-    if (!currentUser) return;
+  const handleCreateChat = useCallback(
+    (data: CreateChat) => {
+      if (!currentUser) return;
 
-    const userId = String(currentUser.id);
-    const existingChat = chats.find(
-      (chat) => chat.userId === userId && chat.name === data.chatName.trim()
-    );
+      const userId = String(currentUser.id);
+      const existingChat = chats.find(
+        (chat) => chat.userId === userId && chat.name === data.chatName.trim()
+      );
 
-    if (existingChat) {
-      setError('chatName', {
-        type: 'manual',
-        message: 'Чат с таким именем уже существует.',
-      });
-      return;
+      if (existingChat) {
+        setError('chatName', {
+          type: 'manual',
+          message: 'Чат с таким именем уже существует.',
+        });
+        return;
+      }
+
+      dispatch(
+        create({
+          userId,
+          name: data.chatName.trim(),
+          domain: data.domain?.trim() || undefined,
+        })
+      );
+
+      onClose();
+    },
+    [currentUser, chats, dispatch, onClose, setError]
+  );
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (!isOpen) return;
+
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'Enter') {
+        handleSubmit(handleCreateChat)();
+      }
+    },
+    [handleSubmit, handleCreateChat, isOpen, onClose]
+  );
+
+  useEffect(() => {
+    if (!isOpen) {
+      reset();
     }
+  }, [isOpen, reset]);
 
-    dispatch(
-      create({
-        userId,
-        name: data.chatName.trim(),
-        domain: data.domain?.trim() || undefined,
-      })
-    );
-    onClose();
-  };
+  useEffect(() => {
+    if (isOpen) {
+      addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [handleKeyDown, isOpen]);
 
   if (!isOpen) return null;
 
@@ -69,7 +104,7 @@ const CreateChatModal = ({ isOpen, onClose }: CreateChatModalProps) => {
       <div className="w-150 h-100 bg-amber-200" onClick={handleContentClick}>
         <h2>Create a new chat</h2>
 
-        <form onSubmit={handleSubmit(handleCreateChat)} noValidate>
+        <form onSubmit={handleSubmit((data: CreateChat) => handleCreateChat(data))} noValidate>
           <div>
             <label htmlFor="chatName">Enter chat name</label>
             <input
@@ -78,6 +113,7 @@ const CreateChatModal = ({ isOpen, onClose }: CreateChatModalProps) => {
               placeholder="MyNewChat"
               autoComplete="off"
               {...register('chatName')}
+              autoFocus
             />
             {errors.chatName?.message && (
               <p className="text-xs text-rose-400">{errors.chatName.message}</p>
