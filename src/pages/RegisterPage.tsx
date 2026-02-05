@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { registerSchema, type Register } from '../schemas/auth';
 import { register as registerAction } from '../store/authSlice';
 import type { RootState } from '../store/store';
+
 const RegisterPage = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState<boolean>(false);
