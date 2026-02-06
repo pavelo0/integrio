@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../store/authSlice';
 import type { RootState } from '../store/store';
 
-const PricingPage = () => {
+export const PricingPage = () => {
   const currentUser = useSelector((state: RootState) => state.auth.currentUser);
-  const dispath = useDispatch();
 
   const navigate = useNavigate();
   const handleClick = () => {
     navigate('/');
-    dispath(logout());
+    logout();
+    console.log(currentUser);
   };
 
   const plans = [
@@ -169,5 +169,3 @@ const PricingPage = () => {
     </div>
   );
 };
-
-export default PricingPage;

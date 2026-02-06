@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { ROUTES } from '../constants/routes';
 import { registerSchema, type Register } from '../schemas/auth';
 import { register as registerAction } from '../store/authSlice';
 import type { RootState } from '../store/store';
@@ -45,7 +46,7 @@ const RegisterPage = () => {
     }
 
     dispatch(registerAction(data));
-    navigate('/service');
+    navigate(ROUTES.PRICING);
   };
 
   return (

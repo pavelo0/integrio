@@ -4,6 +4,7 @@ import Landing from './layouts/Landing';
 import Service from './layouts/Service';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
+import PricingPage from './pages/PricingPage';
 import RegisterPage from './pages/RegisterPage';
 import ServiceDashboardPage from './pages/ServiceDashboardPage';
 import ServiceHomePage from './pages/ServiceHomePage';
@@ -19,6 +20,7 @@ const App = () => {
         </Route>
         <Route path={ROUTES.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.REGISTRATION} element={<RegisterPage />} />
+        <Route path={ROUTES.PRICING} element={<PricingPage />} />
 
         <Route path={ROUTES.SERVICE} element={<Service />}>
           <Route path="home" element={<ServiceHomePage />} />

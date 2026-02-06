@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { ROUTES } from '../constants/routes';
 import { loginSchema, type Login } from '../schemas/auth';
 import { login } from '../store/authSlice';
 import type { RootState } from '../store/store';
@@ -46,7 +47,12 @@ const LoginPage = () => {
     }
 
     dispatch(login(data));
-    navigate('/service');
+
+    if (user.subscription === 'none') {
+      navigate(ROUTES.PRICING);
+    } else {
+      navigate(ROUTES.SERVICE);
+    }
   };
 
   return (
