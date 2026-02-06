@@ -1,51 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { SUBSCRIPTION_PLANS } from '../constants/plans';
 import { logout } from '../store/authSlice';
 import type { RootState } from '../store/store';
 
 const PricingPage = () => {
   const currentUser = useSelector((state: RootState) => state.auth.currentUser);
   const dispath = useDispatch();
-
   const navigate = useNavigate();
-  const handleClick = () => {
+  const handleLogoutClick = () => {
     navigate('/');
     dispath(logout());
   };
+  const handleSubClick = (subId: string) => {
+    navigate(`/payment/${subId}`);
+  };
 
-  const plans = [
-    {
-      id: 'basic',
-      name: 'Basic',
-      price: '2 000',
-      period: 'в месяц',
-      description: 'Для малого бизнеса и тестов. Один сайт, до 1 000 диалогов.',
-      features: [
-        'Виджет на один сайт',
-        'До 1 000 диалогов в месяц',
-        'Базовые настройки чата',
-        'Email-поддержка',
-      ],
-      cta: 'Начать с Basic',
-      highlighted: false,
-    },
-    {
-      id: 'pro',
-      name: 'Pro',
-      price: '4 200',
-      period: 'в месяц',
-      description: 'Для роста продаж. Несколько сайтов, мессенджеры, приоритетная поддержка.',
-      features: [
-        'Неограниченно сайтов',
-        'До 10 000 диалогов',
-        'Telegram и WhatsApp',
-        'Приоритетная поддержка',
-        'Кастомный тон и сценарии',
-      ],
-      cta: 'Выбрать Pro',
-      highlighted: true,
-    },
-  ];
+  const plans = SUBSCRIPTION_PLANS;
 
   return (
     <div
@@ -84,7 +55,7 @@ const PricingPage = () => {
               <button
                 type="button"
                 className="shrink-0 rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/15"
-                onClick={handleClick}
+                onClick={handleLogoutClick}
               >
                 Выйти
               </button>
@@ -152,8 +123,8 @@ const PricingPage = () => {
                   </li>
                 ))}
               </ul>
-              <Link
-                to="/service"
+              <button
+                onClick={() => handleSubClick(plan.id)}
                 className={`mt-8 py-3 rounded-xl text-center font-medium transition-colors block cursor-pointer ${
                   plan.highlighted
                     ? 'bg-(--accent) text-slate-900 hover:bg-(--accent-hover)'
@@ -161,7 +132,7 @@ const PricingPage = () => {
                 }`}
               >
                 {plan.cta}
-              </Link>
+              </button>
             </article>
           ))}
         </div>
