@@ -1,3 +1,5 @@
+import { MessageCircle, Send } from 'lucide-react';
+
 const WelcomeSection = () => {
   return (
     <section
@@ -65,14 +67,11 @@ const WelcomeSection = () => {
                 <div className="px-5 pt-5 pb-4">
                   <div className="flex items-center gap-2 mb-4" aria-hidden="true">
                     <div className="w-10 h-10 rounded-xl bg-(--accent)/20 flex items-center justify-center">
-                      <svg
+                      <MessageCircle
                         className="w-5 h-5 text-(--accent)"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
-                      </svg>
+                        aria-hidden
+                        strokeWidth={2}
+                      />
                     </div>
                     <div className="flex-1">
                       <span
@@ -105,14 +104,7 @@ const WelcomeSection = () => {
                   <div className="mt-4 flex gap-2" aria-hidden="true">
                     <span className="flex-1 h-9 rounded-xl bg-slate-600/40" />
                     <span className="w-9 h-9 rounded-xl bg-(--accent) flex items-center justify-center">
-                      <svg
-                        className="w-4 h-4 text-slate-900"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-                      </svg>
+                      <Send className="w-4 h-4 text-slate-900" aria-hidden strokeWidth={2} />
                     </span>
                   </div>
                 </div>

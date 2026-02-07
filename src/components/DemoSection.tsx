@@ -1,3 +1,4 @@
+import { MessageCircle, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const DemoSection = () => {
@@ -82,14 +83,7 @@ const DemoSection = () => {
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
                     style={{ backgroundColor: 'var(--accent)' }}
                   >
-                    <svg
-                      className="w-5 h-5 text-slate-900"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
-                    </svg>
+                    <MessageCircle className="w-5 h-5 text-slate-900" aria-hidden strokeWidth={2} />
                   </div>
                   <div className="flex-1">
                     <span className="block h-2.5 w-20 rounded bg-slate-500/60" aria-hidden="true" />
@@ -133,14 +127,7 @@ const DemoSection = () => {
                     className="w-9 h-9 rounded-xl flex items-center justify-center"
                     style={{ backgroundColor: 'var(--accent)' }}
                   >
-                    <svg
-                      className="w-4 h-4 text-slate-900"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-                    </svg>
+                    <Send className="w-4 h-4 text-slate-900" aria-hidden strokeWidth={2} />
                   </span>
                 </div>
               </div>
