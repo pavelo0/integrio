@@ -20,11 +20,24 @@ const ServiceHomePage = () => {
     <div className="relative min-h-full py-8">
       <div className="absolute inset-0 opacity-30" aria-hidden="true" />
       <div className="container relative z-10">
-        <h1 className="text-4xl font-bold text-white tracking-tight">Chat library</h1>
-        <p className="mt-3 text-slate-400">Your chat widgets will appear here.</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold text-white tracking-tight">Chat library</h1>
+            <p className="mt-3 text-slate-400">Your chat widgets will appear here.</p>
+          </div>
+          {userChatsLength > 0 && (
+            <button
+              type="button"
+              onClick={openChatCreateModal}
+              className="rounded-full bg-(--accent) px-6 py-2.5 font-medium text-slate-900 shadow-lg shadow-emerald-500/25 transition-colors hover:bg-(--accent-hover)"
+            >
+              Create chat
+            </button>
+          )}
+        </div>
 
         {userChatsLength > 0 ? (
-          <ChatsList onOpenCreateModal={openChatCreateModal} />
+          <ChatsList />
         ) : (
           <EmptyChats onOpenCreateModal={openChatCreateModal} />
         )}

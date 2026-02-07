@@ -41,8 +41,11 @@ const chatsSlice = createSlice({
         });
       }
     },
+    setCurrentChat: (state, action: PayloadAction<Chat>) => {
+      state.currentChat = action.payload;
+    },
   },
 });
 
 export default chatsSlice.reducer;
-export const { create } = chatsSlice.actions;
+export const { create, setCurrentChat } = chatsSlice.actions;

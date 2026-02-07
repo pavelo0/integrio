@@ -2,11 +2,7 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 import ChatItem from './СhatItem';
 
-interface ChatsListProps {
-  onOpenCreateModal?: () => void;
-}
-
-const ChatsList = ({ onOpenCreateModal }: ChatsListProps) => {
+const ChatsList = () => {
   const currentUser = useSelector((state: RootState) => state.auth.currentUser);
   const allChats = useSelector((state: RootState) => state.chat.chats);
   const chats = currentUser
@@ -26,13 +22,6 @@ const ChatsList = ({ onOpenCreateModal }: ChatsListProps) => {
           </li>
         ))}
       </ul>
-      {onOpenCreateModal && (
-        <div className="mt-4">
-          <button type="button" onClick={onOpenCreateModal}>
-            Create
-          </button>
-        </div>
-      )}
     </section>
   );
 };

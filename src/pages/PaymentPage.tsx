@@ -1,14 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { SUBSCRIPTION_PLANS } from '../constants/plans';
 import { ROUTES } from '../constants/routes';
 import { paymentSchema, type Payment } from '../schemas/payment';
+import { updateSubscription } from '../store/authSlice';
 import { formatCardNumber, formatExpiry } from '../utils/format';
 
 const PaymentPage = () => {
   const { subId } = useParams<{ subId: string }>();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const plan = subId ? SUBSCRIPTION_PLANS.find((p) => p.id === subId) : null;
 
   const {
@@ -28,6 +31,9 @@ const PaymentPage = () => {
 
   const onSubmit = (data: Payment) => {
     console.log(data);
+    if (plan) {
+      dispatch(updateSubscription({ subscription: plan.id }));
+    }
     navigate(ROUTES.SERVICE);
   };
 

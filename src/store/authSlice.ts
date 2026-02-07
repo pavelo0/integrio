@@ -17,6 +17,9 @@ interface RegisterData {
   password: string;
   rememberMe: boolean;
 }
+interface UpdateSub {
+  subscription: 'none' | 'basic' | 'pro';
+}
 interface AuthState {
   users: User[];
   currentUser: User | null;
@@ -67,8 +70,19 @@ const authSlice = createSlice({
       state.currentUser = null;
       state.isAuth = false;
     },
+
+    updateSubscription: (state, action: PayloadAction<UpdateSub>) => {
+      if (state.currentUser) {
+        state.currentUser.subscription = action.payload.subscription;
+        const userInList = state.users.find((user) => user.id === state.currentUser?.id);
+
+        if (userInList) {
+          userInList.subscription = action.payload?.subscription;
+        }
+      }
+    },
   },
 });
 
 export default authSlice.reducer;
-export const { register, login, logout } = authSlice.actions;
+export const { register, login, logout, updateSubscription } = authSlice.actions;
